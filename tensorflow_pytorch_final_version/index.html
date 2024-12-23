@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNN MNIST - TensorFlow vs PyTorch</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="particles-background" id="particles-js"></div>
+    
+    <header class="header">
+        <nav>
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                CNN MNIST
+            </div>
+            <ul>
+                <li><a href="#overview"><i class="fas fa-home"></i> Overview</a></li>
+                <li><a href="#tensorflow">
+                    <img src="Tensorflow_logo.svg.png" alt="TensorFlow" style="width: 1em; height: 1em; vertical-align: middle;"> TensorFlow
+                </a></li>
+                <li><a href="#pytorch">
+                    <img src="pytorch-icon-1694x2048-jgwjy3ne.png" alt="PyTorch" style="width: 1em; height: 1em; vertical-align: middle;"> PyTorch
+                </a></li>
+                <li><a href="#comparison"><i class="fas fa-code-compare"></i> Comparison</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="overview" class="hero">
+            <div class="container">
+                <h1>CNN Implementation Comparison</h1>
+                <h2>TensorFlow vs PyTorch for MNIST Classification</h2>
+                <div class="framework-badges">
+                    <span class="badge tensorflow">
+                        <img src="Tensorflow_logo.svg.png" alt="TensorFlow" class="framework-badge-icon"> TensorFlow
+                    </span>
+                    <span class="badge pytorch">
+                        <img src="pytorch-icon-1694x2048-jgwjy3ne.png" alt="PyTorch" class="framework-badge-icon"> PyTorch
+                    </span>
+                </div>
+                <div class="overview-content">
+                    <p>This page compares two different implementations of a Convolutional Neural Network (CNN) for the MNIST digit classification task using pure TensorFlow and PyTorch. Both implementations achieve high accuracy while showcasing the unique features of each framework.</p>
+                </div>
+                <div class="header-content">
+                    <h1>CNN Implementations</h1>
+                    <div class="framework-icons">
+                        <img src="Tensorflow_logo.svg.png" alt="TensorFlow" class="framework-icon">
+                        <span class="vs">VS</span>
+                        <img src="pytorch-icon-1694x2048-jgwjy3ne.png" alt="PyTorch" class="framework-icon">
+                    </div>
+                    <div class="frameworks-comparison">
+                        <div class="comparison-container">
+                            <img src="pytorch_tensorflow.png" alt="PyTorch vs TensorFlow Comparison" class="comparison-image">
+                        </div>
+                    </div>
+                    <p class="header-description">A detailed comparison of CNN implementations using TensorFlow and PyTorch for MNIST digit classification.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tensorflow" class="implementation-section">
+            <div class="container">
+                <h2>
+                    <img src="Tensorflow_logo.svg.png" alt="TensorFlow" style="width: 1.5em; height: 1.5em; vertical-align: middle;"> TensorFlow Implementation
+                </h2>
+                <div class="implementation-details">
+                    <h3>Key Features</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-cogs"></i>
+                            <h4>Pure TensorFlow</h4>
+                            <p>Implementation using low-level TensorFlow operations without Keras, providing full control over the architecture</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-layer-group"></i>
+                            <h4>Architecture</h4>
+                            <p>2 Convolutional layers (32 and 64 filters) with max pooling, followed by 2 fully connected layers</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-brain"></i>
+                            <h4>Training</h4>
+                            <p>Custom training loop with gradient tape for automatic differentiation</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="filename">cnn_pure_tensorflow.py</span>
+                        <div class="language-badge">Pure TensorFlow</div>
+                    </div>
+                    <pre><code class="language-python" id="tensorflow-code">
+                        // Code will be loaded via JavaScript
+                    </code></pre>
+                </div>
+
+                <div class="implementation-notes">
+                    <h3>Implementation Analysis</h3>
+                    <div class="analysis-grid">
+                        <div class="analysis-card">
+                            <h4>Data Preprocessing</h4>
+                            <ul>
+                                <li>Normalizes pixel values to [0, 1] range</li>
+                                <li>Reshapes data to include channel dimension</li>
+                                <li>Converts labels to one-hot encoding</li>
+                                <li>Handles batching for efficient training</li>
+                            </ul>
+                        </div>
+                        <div class="analysis-card">
+                            <h4>Model Architecture</h4>
+                            <ul>
+                                <li>2 Convolutional layers (32 and 64 filters)</li>
+                                <li>Max pooling for spatial dimension reduction</li>
+                                <li>2 Fully connected layers (128 neurons, 10 output)</li>
+                                <li>ReLU activation functions</li>
+                            </ul>
+                        </div>
+                        <div class="analysis-card">
+                            <h4>Training Process</h4>
+                            <ul>
+                                <li>Custom gradient computation with GradientTape</li>
+                                <li>Adam optimizer with 0.001 learning rate</li>
+                                <li>Batch size of 128 for stable training</li>
+                                <li>10 epochs of training</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pytorch" class="implementation-section">
+            <div class="container">
+                <h2>
+                    <img src="pytorch-icon-1694x2048-jgwjy3ne.png" alt="PyTorch" style="width: 1.5em; height: 1.5em; vertical-align: middle;"> PyTorch Implementation
+                </h2>
+                <div class="implementation-details">
+                    <h3>Key Features</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-code"></i>
+                            <h4>Object-Oriented Design</h4>
+                            <p>Clean, modular implementation using PyTorch's nn.Module for better code organization</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-project-diagram"></i>
+                            <h4>Dynamic Computation</h4>
+                            <p>Dynamic computational graphs for flexible model definition and easier debugging</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-tools"></i>
+                            <h4>Built-in Tools</h4>
+                            <p>Leverages PyTorch's DataLoader, optimizers, and loss functions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="filename">pytorch_cnn.py</span>
+                        <div class="language-badge">PyTorch</div>
+                    </div>
+                    <pre><code class="language-python" id="pytorch-code"></code></pre>
+                </div>
+
+                <div class="implementation-notes">
+                    <h3>Implementation Analysis</h3>
+                    <div class="analysis-grid">
+                        <div class="analysis-card">
+                            <h4>Data Management</h4>
+                            <ul>
+                                <li>Uses torchvision.datasets for MNIST loading</li>
+                                <li>Custom normalization (μ=0.1307, σ=0.3081)</li>
+                                <li>Parallel data loading with num_workers=2</li>
+                                <li>Efficient batch processing with DataLoader</li>
+                            </ul>
+                        </div>
+                        <div class="analysis-card">
+                            <h4>Network Structure</h4>
+                            <ul>
+                                <li>Identical architecture to TensorFlow version</li>
+                                <li>Added dropout (0.25) for regularization</li>
+                                <li>Dynamic input size calculation</li>
+                                <li>Cleaner forward pass definition</li>
+                            </ul>
+                        </div>
+                        <div class="analysis-card">
+                            <h4>Training Configuration</h4>
+                            <ul>
+                                <li>Smaller batch size (64) for better generalization</li>
+                                <li>Same learning rate (0.001)</li>
+                                <li>Explicit train/eval mode switching</li>
+                                <li>Progress tracking with tqdm</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-section">
+                    <h3>Training Results</h3>
+                    <div class="screenshot-grid">
+                        <div class="screenshot-card">
+                            <img src="Pytorch_screenshots/Mnist.png" alt="MNIST Dataset" />
+                            <p>MNIST Dataset Visualization - Sample training images showing digit variety</p>
+                        </div>
+                        <div class="screenshot-card">
+                            <img src="Pytorch_screenshots/model_summary.png" alt="Model Architecture" />
+                            <p>Model Architecture Summary - Layer-by-layer network structure</p>
+                        </div>
+                        <div class="screenshot-card">
+                            <img src="Pytorch_screenshots/model_training.png" alt="Training Process" />
+                            <p>Training Progress - Epoch-wise training metrics</p>
+                        </div>
+                        <div class="screenshot-card">
+                            <img src="Pytorch_screenshots/training_and_loss_and_accuracy.png" alt="Training Metrics" />
+                            <p>Loss and Accuracy Curves - Training convergence visualization</p>
+                        </div>
+                        <div class="screenshot-card">
+                            <img src="Pytorch_screenshots/model_corrcect_prediction.png" alt="Model Predictions" />
+                            <p>Model Predictions - Test set prediction examples</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="comparison-section">
+            <div class="container">
+                <h2><i class="fas fa-code-compare"></i> Framework Comparison</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <div class="card-header tensorflow">
+                            <img src="Tensorflow_logo.svg.png" alt="TensorFlow" class="framework-card-icon">
+                            <h3>TensorFlow Advantages</h3>
+                        </div>
+                        <ul>
+                            <li>Fine-grained control over operations</li>
+                            <li>Explicit gradient computation</li>
+                            <li>Efficient static graphs</li>
+                            <li>Production-ready serving</li>
+                            <li>Extensive visualization with TensorBoard</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <div class="card-header pytorch">
+                            <img src="pytorch-icon-1694x2048-jgwjy3ne.png" alt="PyTorch" class="framework-card-icon">
+                            <h3>PyTorch Advantages</h3>
+                        </div>
+                        <ul>
+                            <li>Intuitive object-oriented design</li>
+                            <li>Dynamic computational graphs</li>
+                            <li>Native Python integration</li>
+                            <li>Easier debugging</li>
+                            <li>More pythonic coding style</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="code-comparison-section">
+                    <h3>Code Comparison</h3>
+                    <div class="code-tabs">
+                        <button class="tab-button" onclick="showTab('model')">Model Definition</button>
+                        <button class="tab-button" onclick="showTab('data')">Data Loading</button>
+                        <button class="tab-button active" onclick="showTab('training')">Training Loop</button>
+                    </div>
+                    <div class="code-containers">
+                        <div class="code-container-wrapper" id="model">
+                            <div class="code-container tensorflow">
+                                <div class="code-header">
+                                    <span class="filename">TensorFlow Model</span>
+                                </div>
+                                <pre><code class="language-python">
+# TensorFlow CNN Model Definition
+class CNNModel(tf.keras.Model):
+    def __init__(self):
+        super(CNNModel, self).__init__()
+        # First Convolutional Block
+        self.conv1 = tf.keras.layers.Conv2D(32, 3, activation='relu')
+        self.pool1 = tf.keras.layers.MaxPool2D((2, 2))
+        self.dropout1 = tf.keras.layers.Dropout(0.25)
+        
+        # Second Convolutional Block
+        self.conv2 = tf.keras.layers.Conv2D(64, 3, activation='relu')
+        self.pool2 = tf.keras.layers.MaxPool2D((2, 2))
+        self.dropout2 = tf.keras.layers.Dropout(0.25)
+        
+        # Dense Layers
+        self.flatten = tf.keras.layers.Flatten()
+        self.dense1 = tf.keras.layers.Dense(128, activation='relu')
+        self.dropout3 = tf.keras.layers.Dropout(0.5)
+        self.dense2 = tf.keras.layers.Dense(10, activation='softmax')
+    
+    def call(self, x, training=False):
+        # First Block
+        x = self.conv1(x)
+        x = self.pool1(x)
+        if training:
+            x = self.dropout1(x)
+        
+        # Second Block
+        x = self.conv2(x)
+        x = self.pool2(x)
+        if training:
+            x = self.dropout2(x)
+        
+        # Dense Layers
+        x = self.flatten(x)
+        x = self.dense1(x)
+        if training:
+            x = self.dropout3(x)
+        return self.dense2(x)
+                                </code></pre>
+                            </div>
+                            <div class="code-container pytorch">
+                                <div class="code-header">
+                                    <span class="filename">PyTorch Model</span>
+                                </div>
+                                <pre><code class="language-python">
+# PyTorch CNN Model Definition
+class CNNModel(nn.Module):
+    def __init__(self):
+        super(CNNModel, self).__init__()
+        # First Convolutional Block
+        self.conv1 = nn.Sequential(
+            nn.Conv2d(1, 32, kernel_size=3),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2),
+            nn.Dropout(p=0.25)
+        )
+        
+        # Second Convolutional Block
+        self.conv2 = nn.Sequential(
+            nn.Conv2d(32, 64, kernel_size=3),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2),
+            nn.Dropout(p=0.25)
+        )
+        
+        # Dense Layers
+        self.fc = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(64 * 5 * 5, 128),
+            nn.ReLU(),
+            nn.Dropout(p=0.5),
+            nn.Linear(128, 10),
+            nn.Softmax(dim=1)
+        )
+    
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.conv2(x)
+        return self.fc(x)
+                                </code></pre>
+                            </div>
+                        </div>
+                        <div class="code-container-wrapper" id="data">
+                            <div class="code-container tensorflow">
+                                <div class="code-header">
+                                    <span class="filename">TensorFlow Data Loading</span>
+                                </div>
+                                <pre><code class="language-python">
+# TensorFlow Data Loading and Preprocessing
+def load_and_preprocess_data():
+    # Load MNIST dataset
+    (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+    
+    # Normalize and reshape data
+    x_train = x_train.astype('float32') / 255.0
+    x_test = x_test.astype('float32') / 255.0
+    
+    # Add channel dimension
+    x_train = x_train[..., tf.newaxis]
+    x_test = x_test[..., tf.newaxis]
+    
+    # Create data pipeline
+    train_ds = tf.data.Dataset.from_tensor_slices(
+        (x_train, y_train)
+    ).shuffle(10000).batch(32).prefetch(tf.data.AUTOTUNE)
+    
+    test_ds = tf.data.Dataset.from_tensor_slices(
+        (x_test, y_test)
+    ).batch(32).prefetch(tf.data.AUTOTUNE)
+    
+    return train_ds, test_ds
+
+# Data Augmentation
+data_augmentation = tf.keras.Sequential([
+    tf.keras.layers.RandomRotation(0.1),
+    tf.keras.layers.RandomZoom(0.1),
+])
+
+# Usage Example
+train_ds, test_ds = load_and_preprocess_data()
+for images, labels in train_ds:
+    # Apply augmentation during training
+    augmented_images = data_augmentation(images, training=True)
+    # Train step...
+                                </code></pre>
+                            </div>
+                            <div class="code-container pytorch">
+                                <div class="code-header">
+                                    <span class="filename">PyTorch Data Loading</span>
+                                </div>
+                                <pre><code class="language-python">
+# PyTorch Data Loading and Preprocessing
+def load_and_preprocess_data():
+    # Define transformations
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.1307,), (0.3081,))
+    ])
+    
+    # Data augmentation for training
+    train_transform = transforms.Compose([
+        transforms.RandomRotation(10),
+        transforms.RandomAffine(0, translate=(0.1, 0.1)),
+        transforms.ToTensor(),
+        transforms.Normalize((0.1307,), (0.3081,))
+    ])
+    
+    # Load MNIST dataset
+    train_dataset = datasets.MNIST(
+        './data', 
+        train=True,
+        download=True,
+        transform=train_transform
+    )
+    
+    test_dataset = datasets.MNIST(
+        './data', 
+        train=False,
+        transform=transform
+    )
+    
+    # Create data loaders
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=32,
+        shuffle=True,
+        num_workers=2,
+        pin_memory=True
+    )
+    
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=32,
+        shuffle=False,
+        num_workers=2,
+        pin_memory=True
+    )
+    
+    return train_loader, test_loader
+
+# Usage Example
+train_loader, test_loader = load_and_preprocess_data()
+for batch_idx, (data, target) in enumerate(train_loader):
+    # Move to GPU if available
+    data, target = data.to(device), target.to(device)
+    # Train step...
+                                </code></pre>
+                            </div>
+                        </div>
+                        <div class="code-container-wrapper active" id="training">
+                            <div class="code-container tensorflow">
+                                <div class="code-header">
+                                    <span class="filename">TensorFlow Training</span>
+                                </div>
+                                <pre><code class="language-python">
+```python
+# TensorFlow Training Loop
+with tf.GradientTape() as tape:
+    predictions = model(images, training=True)
+    loss = loss_object(labels, predictions)
+gradients = tape.gradient(loss, model.trainable_variables)
+optimizer.apply_gradients(zip(gradients, 
+                            model.trainable_variables))
+```
+                                </code></pre>
+                            </div>
+                            <div class="code-container pytorch">
+                                <div class="code-header">
+                                    <span class="filename">PyTorch Training</span>
+                                </div>
+                                <pre><code class="language-python">
+```python
+# PyTorch Training Loop
+optimizer.zero_grad()
+outputs = model(images)
+loss = criterion(outputs, labels)
+loss.backward()
+optimizer.step()
+```
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="performance-metrics">
+                    <h3>Performance Analysis</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <h4>Training Speed</h4>
+                            </div>
+                            <div class="metric-chart">
+                                <canvas id="speedChart"></canvas>
+                            </div>
+                            <p>Comparison of training time per epoch</p>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <i class="fas fa-memory"></i>
+                                <h4>Memory Usage</h4>
+                            </div>
+                            <div class="metric-chart">
+                                <canvas id="memoryChart"></canvas>
+                            </div>
+                            <p>GPU memory consumption during training</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="learning-resources">
+                    <h3>Learning Resources</h3>
+                    <div class="resources-grid">
+                        <div class="resource-card tensorflow">
+                            <img src="Tensorflow_logo.svg.png" alt="TensorFlow" class="resource-icon">
+                            <h4>TensorFlow Resources</h4>
+                            <ul>
+                                <li><a href="https://www.tensorflow.org/tutorials" target="_blank">Official Tutorials</a></li>
+                                <li><a href="https://www.tensorflow.org/api_docs" target="_blank">API Documentation</a></li>
+                                <li><a href="https://www.tensorflow.org/guide" target="_blank">Developer Guides</a></li>
+                            </ul>
+                        </div>
+                        <div class="resource-card pytorch">
+                            <img src="pytorch-icon-1694x2048-jgwjy3ne.png" alt="PyTorch" class="resource-icon">
+                            <h4>PyTorch Resources</h4>
+                            <ul>
+                                <li><a href="https://pytorch.org/tutorials/" target="_blank">Official Tutorials</a></li>
+                                <li><a href="https://pytorch.org/docs/stable/index.html" target="_blank">Documentation</a></li>
+                                <li><a href="https://pytorch.org/tutorials/beginner/basics/intro.html" target="_blank">Getting Started</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="signature" class="signature-section">
+            <div class="signature-container">
+                <div class="signature-content">
+                    <div class="signature-decorative-line"></div>
+                    <div class="signature-main">
+                        <h2 class="signature-name">Hamdi Abdeljawed</h2>
+                        <div class="signature-handwritten">H.Abdeljawed</div>
+                        <div class="signature-number">№ 2024</div>
+                    </div>
+                    <div class="signature-decorative-line"></div>
+                    <div class="signature-quote">
+                        <p>"Bridging the gap between TensorFlow and PyTorch, one implementation at a time."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>Created with <i class="fas fa-heart"></i> for Deep Learning enthusiasts</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
